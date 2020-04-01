@@ -5,21 +5,44 @@ import Link from 'next/link';
 const Writer = () => {
     const router = useRouter(); 
     const writer = router.query.writer; 
-    const song_link = "https://open.spotify.com/track/1FWHYXyXrcXDhbyYFyf4Rp?si=1CP41oVzQJGb3HS7GvJL7Q";
-    const book_link = "https://www.goodreads.com/book/show/7126.The_Count_of_Monte_Cristo";
-    const work_link = "https://listcle.com/";
+
+    let img_src = undefined; 
+    let portfolio_link = undefined; 
+    let song_link = undefined; 
+    let book_link = undefined; 
+    let work_link = undefined; 
+
+    if (writer === "Krrish") {
+        img_src = "/writer_images/Krrish.JPG";
+        portfolio_link = "http://www.krishdholakia.com/";
+        song_link = "https://open.spotify.com/track/1FWHYXyXrcXDhbyYFyf4Rp?si=1CP41oVzQJGb3HS7GvJL7Q";
+        book_link = "https://www.goodreads.com/book/show/7126.The_Count_of_Monte_Cristo";
+        work_link = "https://listcle.com/";
+    } else if (writer === "Aahan") {
+        song_link = "https://open.spotify.com/track/6ooluO7DiEhI1zmK94nRCM?si=cHwTzs3WSiyY9nmwbimJFw";
+        book_link = "https://www.goodreads.com/book/show/12505.The_Idiot";
+    } else if (writer === "Vaibhav") {
+        img_src = "/writer_images/Vaibhav.jpeg"
+    } else if (writer === "Urmil") {
+        portfolio_link = "https://urmilshroff.tech/"; 
+    } else if (writer === "Rohit") {
+        img_src = "/writer_images/Rohit.jpeg";
+        portfolio_link = "https://www.linkedin.com/mwlite/in/rohit-bansal127";
+    }
+
+
     return (
         <div className="container">
             <Banner/>
             <div className="main-body">
                 <h2>{writer}</h2>
                 <div className="writer-meta-data">
-                    <img src="/writer_images/krrish.JPG"/>
+                    {img_src ? <img src={img_src}/> : null}
                     <div className="writer-info">
-                        <a href="http://www.krishdholakia.com/" target="_blank"><p style={{'color' : '#FF8080'}}>me</p></a>
-                        <a href={song_link} target="_blank"><p style={{'color' : '#B9BD07'}}>quarantine song of the day 🎧</p></a>
-                        <a href={book_link} target="_blank"><p style={{'color' : '#00D4C8'}}>what i’m reading right now 📚</p></a>
-                        <a href={work_link} target="_blank"><p style={{'color' : '#21EE00'}}>what i’m building right now ‍💻</p></a>
+                        {portfolio_link ? <a href={portfolio_link} target="_blank"><p style={{'color' : '#FF8080'}}>me</p></a> : null}
+                        {song_link ? <a href={song_link} target="_blank"><p style={{'color' : '#B9BD07'}}>quarantine song of the day 🎧</p></a> : null}
+                        {book_link ? <a href={book_link} target="_blank"><p style={{'color' : '#00D4C8'}}>what i’m reading right now 📚</p></a> : null}
+                        {work_link ? <a href={work_link} target="_blank"><p style={{'color' : '#21EE00'}}>what i’m building right now ‍💻</p></a> : null}
                         <h3>Enjoy! 😊</h3>
                     </div>
                 </div>

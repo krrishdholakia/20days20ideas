@@ -7,6 +7,7 @@ const Writers = React.memo(() => (
     <Link href="/writer?writer=Aahan"><h3>Aahan</h3></Link>
     <Link href="/writer?writer=Vaibhav"><h3>Vaibhav</h3></Link>
     <Link href="/writer?writer=Rohit"><h3>Rohit</h3></Link>
+    <Link href="/writer?writer=Urmil"><h3>Urmil</h3></Link>
 </div>
 )); 
 
