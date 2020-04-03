@@ -1,3 +1,35 @@
 {
-    "hello" : "hello"
+    "Krrish" : {
+        "portfolio_link" : "http://www.krishdholakia.com/",
+        "song_link" : "https://open.spotify.com/track/1FWHYXyXrcXDhbyYFyf4Rp?si=1CP41oVzQJGb3HS7GvJL7Q",
+        "book_link" : "https://www.goodreads.com/book/show/7126.The_Count_of_Monte_Cristo",
+        "work_link" : "https://listcle.com/",
+        "img_src" : "/writer_images/Krrish.JPG"
+    },
+    "Rohit" : {
+        "portfolio_link" : "https://www.linkedin.com/mwlite/in/rohit-bansal127",
+        "song_link" : null,
+        "book_link" : null,
+        "work_link" : null,
+        "img_src" : "/writer_images/Rohit.jpeg"
+    },
+    "Aahan" : {
+        "portfolio_link" : null,
+        "song_link" : "https://open.spotify.com/track/6ooluO7DiEhI1zmK94nRCM?si=cHwTzs3WSiyY9nmwbimJFw",
+        "book_link" : "https://www.goodreads.com/book/show/12505.The_Idiot",
+        "work_link" : null
+    },
+    "Urmil" : {
+        "portfolio_link" : "https://urmilshroff.tech/",
+        "song_link" : null,
+        "book_link" : null,
+        "work_link" : "https://fliverdev.github.io/"
+    },
+    "Vaibhav" : {
+        "portfolio_link" : null,
+        "song_link" : null,
+        "book_link" : null,
+        "work_link" : null,
+        "img_src" : "/writer_images/Vaibhav.jpeg"
+    }
 }

@@ -1,17 +1,35 @@
 import Banner from '../components/banner';
 import {useRouter} from 'next/router';
+import useSWR from 'swr'; 
+
+function fetcher(url) {
+    return fetch(url).then(r => r.json());
+}
 
 const Content = () => {
-    const router = useRouter(); 
-    const day = router.query.day; 
-    const writer = router.query.writer; 
+    const {query} = useRouter(); 
+    const articleID = query.articleID; 
+    const day = query.day; 
+    const writer = query.writer; 
+    
+    const { data, error } = useSWR(
+        `api/getPage${query.articleID ? '?articleID=' + articleID : ''}`,
+        fetcher
+    );
+
+    let title = data?.title; 
+    let body = data?.body; 
+
+    console.log("data: ", data);
     return (
         <div className="container">
             <Banner/>
             <div className="main-body">
                 <h3>Day {day}</h3>
-                <h1>💡 Government Announcement Aggregation Tool</h1>
-                <p>By {writer}</p>
+                <h1>💡 {title}</h1>
+                <p id="author">By {writer}</p>
+                <div id="body"
+                dangerouslySetInnerHTML={{ __html: body }}/>
             </div>
             <style jsx>{`
                 @font-face {
@@ -34,6 +52,15 @@ const Content = () => {
 
                 .main-body {
                     margin: 2%;
+                }
+
+                #author {
+                    font-size: small;
+                    opacity: 0.5; 
+                }
+
+                #body {
+                    margin-top: 2%; 
                 }
             `}</style>
         </div>

@@ -1,33 +1,56 @@
 import Banner from '../components/banner';
 import {useRouter} from 'next/router';
 import Link from 'next/link'; 
+import useSWR from 'swr'; 
+
+function fetcher(url) {
+    return fetch(url).then(r => r.json());
+  }
+  
+
+const Days = React.memo(({articles, writer}) => {
+    let days = []; 
+
+    console.log("Articles: ", articles); 
+
+    if (!articles) return null; 
+
+    Object.keys(articles).forEach(day => {
+        let renderedComponent = <div className="list-item">
+        <Link href={`/content?day=1&writer=${writer}&articleID=${articles[day]["unique_id"]}`}><h3 className="day-count">Day {day}</h3></Link>
+        </div>; 
+        
+        days.push(renderedComponent); 
+    })
+
+    return days;  
+}); 
 
 const Writer = () => {
-    const router = useRouter(); 
-    const writer = router.query.writer; 
+    const {query} = useRouter(); 
+
+    const { data, error } = useSWR(
+        `api/getWriterInfo${query.writer ? '?writer=' + query.writer : ''}`,
+        fetcher
+      );
+    console.log("data: ", data);
+
+    const writer = query.writer; 
 
     let img_src = undefined; 
     let portfolio_link = undefined; 
     let song_link = undefined; 
     let book_link = undefined; 
     let work_link = undefined; 
+    let articles = undefined; 
 
-    if (writer === "Krrish") {
-        img_src = "/writer_images/Krrish.JPG";
-        portfolio_link = "http://www.krishdholakia.com/";
-        song_link = "https://open.spotify.com/track/1FWHYXyXrcXDhbyYFyf4Rp?si=1CP41oVzQJGb3HS7GvJL7Q";
-        book_link = "https://www.goodreads.com/book/show/7126.The_Count_of_Monte_Cristo";
-        work_link = "https://listcle.com/";
-    } else if (writer === "Aahan") {
-        song_link = "https://open.spotify.com/track/6ooluO7DiEhI1zmK94nRCM?si=cHwTzs3WSiyY9nmwbimJFw";
-        book_link = "https://www.goodreads.com/book/show/12505.The_Idiot";
-    } else if (writer === "Vaibhav") {
-        img_src = "/writer_images/Vaibhav.jpeg"
-    } else if (writer === "Urmil") {
-        portfolio_link = "https://urmilshroff.tech/"; 
-    } else if (writer === "Rohit") {
-        img_src = "/writer_images/Rohit.jpeg";
-        portfolio_link = "https://www.linkedin.com/mwlite/in/rohit-bansal127";
+    if (data) {
+        portfolio_link = data["portfolio_link"];
+        song_link = data["song_link"];
+        book_link = data["book_link"];
+        work_link = data["work_link"];
+        img_src = data["img_src"];
+        articles = data["articles"]
     }
 
 
@@ -47,9 +70,10 @@ const Writer = () => {
                     </div>
                 </div>
                 <div className="list">
-                    <div className="list-item">
+                    {/* <div className="list-item">
                         <Link href={`/content?day=1&writer=${writer}`}><h3 className="day-count">Day 1</h3></Link>
-                    </div>
+                    </div> */}
+                    <Days articles={articles} writer={writer}/>
                 </div>
             </div>
             <style jsx global>{`
