@@ -53,7 +53,6 @@ const Writer = () => {
         articles = data["articles"]
     }
 
-
     return (
         <div className="container">
             <Banner/>
@@ -62,10 +61,10 @@ const Writer = () => {
                 <div className="writer-meta-data">
                     {img_src ? <img src={img_src}/> : null}
                     <div className="writer-info">
-                        {portfolio_link ? <a href={portfolio_link} target="_blank"><p style={{'color' : '#FF8080'}}>me</p></a> : null}
-                        {song_link ? <a href={song_link} target="_blank"><p style={{'color' : '#B9BD07'}}>quarantine song of the day 🎧</p></a> : null}
-                        {book_link ? <a href={book_link} target="_blank"><p style={{'color' : '#00D4C8'}}>what i’m reading right now 📚</p></a> : null}
-                        {work_link ? <a href={work_link} target="_blank"><p style={{'color' : '#21EE00'}}>what i’m building right now ‍💻</p></a> : null}
+                        {portfolio_link === undefined ? <p style={{'color' : '#FF8080'}}>Checking to see if {writer} set up a portfolio link </p> : portfolio_link ? <a href={portfolio_link} target="_blank"><p style={{'color' : '#FF8080'}}>me</p></a> : null}
+                        {song_link === undefined ? <p style={{'color' : '#B9BD07'}}>Checking to see if {writer} set up a song of the day link </p> : song_link ? <a href={song_link} target="_blank"><p style={{'color' : '#B9BD07'}}>quarantine song of the day 🎧</p></a> : null}
+                        {book_link === undefined ? <p style={{'color' : '#00D4C8'}}>Checking to see if {writer} set up a book recommendation </p> : book_link ? <a href={book_link} target="_blank"><p style={{'color' : '#00D4C8'}}>what i’m reading right now 📚</p></a> : null}
+                        {work_link === undefined ? <p style={{'color' : '#21EE00'}}>Checking to see if {writer} set up a project of theirs to check out! </p> : work_link ? <a href={work_link} target="_blank"><p style={{'color' : '#21EE00'}}>what i’m building right now ‍💻</p></a> : null}
                         <h3>Enjoy! 😊</h3>
                     </div>
                 </div>
@@ -77,13 +76,6 @@ const Writer = () => {
                 </div>
             </div>
             <style jsx global>{`
-            
-            @font-face {
-            font-family: 'Source Code Pro';
-            src: url('/fonts/SourceCodePro-Regular.ttf');
-            font-display: swap;
-            }
-
             html {
                 background: snow;
             }

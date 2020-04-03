@@ -11,14 +11,14 @@ const Content = () => {
     const articleID = query.articleID; 
     const day = query.day; 
     const writer = query.writer; 
-    
+
     const { data, error } = useSWR(
         `api/getPage${query.articleID ? '?articleID=' + articleID : ''}`,
         fetcher
     );
 
-    let title = data?.title; 
-    let body = data?.body; 
+    let title = data? data.title : "Loading..."; 
+    let body = data? data.body : "Loading..."; 
 
     console.log("data: ", data);
     return (
@@ -32,12 +32,6 @@ const Content = () => {
                 dangerouslySetInnerHTML={{ __html: body }}/>
             </div>
             <style jsx>{`
-                @font-face {
-                    font-family: 'Source Code Pro';
-                    src: url('/fonts/SourceCodePro-Regular.ttf');
-                    font-display: swap;
-                }
-    
                 html {
                     background: snow;
                 }
