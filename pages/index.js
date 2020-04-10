@@ -16,12 +16,6 @@ const Home = () => (
         <Banner subtitle={1}/>
         <Writers/>
         <style jsx global>{`
-        @font-face {
-          font-family: 'Source Code Pro';
-          src: url('/fonts/SourceCodePro-Regular.ttf');
-          font-display: swap;
-        }
-
         html {
           background: snow;
         }
